@@ -1,23 +1,42 @@
 import 'package:bloc/bloc.dart';
+import 'package:bloc_cubit/login/model/login_request_model.dart';
+import 'package:bloc_cubit/login/model/login_response.dart';
+import 'package:bloc_cubit/login/service/ILogin_service.dart';
 import 'package:flutter/material.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final GlobalKey<FormState> formKey;
+  final ILoginService service;
 
   bool isLoginFail = false;
+  bool isLoading = false;
 
-  void postUserModel() {
-    if (formKey.currentState?.validate() ?? false) {
-      // TODO service code
+  Future<void> postUserModel() async {
+    if (formKey.currentState != null && formKey.currentState!.validate()) {
+      debugPrint('a');
+      changeLoadingView();
+      final data = await service.postUserLogin(LoginRequestModel(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim()));
+      changeLoadingView();
+      if (data is LoginResponeModel) {
+        emit(LoginComplete(data));
+      }
     } else {
       isLoginFail = true;
       emit(LoginValidateState(isLoginFail));
     }
   }
 
-  LoginCubit(this.formKey, this.emailController, this.passwordController)
+  void changeLoadingView() {
+    isLoading = !isLoading;
+    emit(LoginLoadingState(isLoading));
+  }
+
+  LoginCubit(this.formKey, this.emailController, this.passwordController,
+      {required this.service})
       : super(LoginInitial());
 }
 
@@ -29,4 +48,16 @@ class LoginValidateState extends LoginState {
   final bool isValidate;
 
   LoginValidateState(this.isValidate);
+}
+
+class LoginLoadingState extends LoginState {
+  final bool isLoading;
+
+  LoginLoadingState(this.isLoading);
+}
+
+class LoginComplete extends LoginState {
+  final LoginResponeModel model;
+
+  LoginComplete(this.model);
 }
