@@ -1,9 +1,9 @@
 import 'package:bloc_cubit/login/view/login_view.dart';
 import 'package:bloc_cubit/post/view/post_view.dart';
 import 'package:bloc_cubit/profile/view/profile_view.dart';
-import 'package:finans/finans.dart';
+
 import 'package:flutter/material.dart';
-import 'package:food/food.dart';
+
 import 'home/view/home_view.dart';
 
 void main() {
@@ -38,11 +38,6 @@ class DemoPage extends StatelessWidget {
       body: Column(
         children: [
           Image.asset("assets/images/edit_ic.png"),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => FinansView()));
-              },
-              child: Text("food appe git"))
         ],
       ),
     );
