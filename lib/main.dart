@@ -43,3 +43,17 @@ class DemoPage extends StatelessWidget {
     );
   }
 }
+
+class MaindeEklenenView extends StatefulWidget {
+  const MaindeEklenenView({Key? key}) : super(key: key);
+
+  @override
+  State<MaindeEklenenView> createState() => _MaindeEklenenViewState();
+}
+
+class _MaindeEklenenViewState extends State<MaindeEklenenView> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
