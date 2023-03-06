@@ -1,0 +1,3 @@
+class MapModel {
+  String? mapmodel;
+}
