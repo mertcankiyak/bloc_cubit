@@ -1,5 +1,10 @@
 import 'package:bloc_cubit/login/view/login_view.dart';
+import 'package:bloc_cubit/post/view/post_view.dart';
+import 'package:bloc_cubit/profile/view/profile_view.dart';
+import 'package:finans/finans.dart';
 import 'package:flutter/material.dart';
+import 'package:food/food.dart';
+import 'home/view/home_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +21,30 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginView(),
+      home: DemoPage(),
+    );
+  }
+}
+
+class DemoPage extends StatelessWidget {
+  DemoPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Demo View"),
+      ),
+      body: Column(
+        children: [
+          Image.asset("assets/images/edit_ic.png"),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => FinansView()));
+              },
+              child: Text("food appe git"))
+        ],
+      ),
     );
   }
 }
