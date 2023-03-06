@@ -1,0 +1,3 @@
+class MapView {
+  String? mapmodel;
+}
